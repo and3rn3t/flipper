@@ -7,6 +7,9 @@ import { RFIDChallengeScreen } from './challenges/RFIDChallengeScreen'
 import { SubGHzChallengeScreen } from './challenges/SubGHzChallengeScreen'
 import { InfraredChallengeScreen } from './challenges/InfraredChallengeScreen'
 import { BadUSBChallengeScreen } from './challenges/BadUSBChallengeScreen'
+import { GPIOChallengeScreen } from './challenges/GPIOChallengeScreen'
+import { MultiToolChallengeScreen } from './challenges/MultiToolChallengeScreen'
+import { TimedChallengeScreen } from './challenges/TimedChallengeScreen'
 
 interface ChallengeScreenProps {
   onBack: () => void
@@ -53,6 +56,30 @@ export const challenges: Challenge[] = [
     difficulty: 'Hard',
     tool: 'Bad USB',
     points: 300
+  },
+  {
+    id: 'gpio-bypass',
+    title: 'Electronic Lock Bypass',
+    description: 'Configure GPIO pins to unlock the electronic lock',
+    difficulty: 'Medium',
+    tool: 'GPIO',
+    points: 250
+  },
+  {
+    id: 'speed-run',
+    title: 'Speed Clone Challenge',
+    description: 'Clone 5 badges in 15 seconds',
+    difficulty: 'Hard',
+    tool: 'RFID',
+    points: 350
+  },
+  {
+    id: 'vault-heist',
+    title: 'Vault Heist',
+    description: 'Use multiple tools to break into the vault',
+    difficulty: 'Hard',
+    tool: 'Multi-Tool',
+    points: 400
   }
 ]
 
@@ -90,6 +117,18 @@ export function ChallengeScreen({ onBack }: ChallengeScreenProps) {
   
   if (selectedChallenge === 'badusb-payload') {
     return <BadUSBChallengeScreen onComplete={() => handleChallengeComplete('badusb-payload', 300)} onBack={handleChallengeBack} />
+  }
+
+  if (selectedChallenge === 'gpio-bypass') {
+    return <GPIOChallengeScreen onComplete={() => handleChallengeComplete('gpio-bypass', 250)} onBack={handleChallengeBack} />
+  }
+
+  if (selectedChallenge === 'speed-run') {
+    return <TimedChallengeScreen onComplete={() => handleChallengeComplete('speed-run', 350)} onBack={handleChallengeBack} />
+  }
+
+  if (selectedChallenge === 'vault-heist') {
+    return <MultiToolChallengeScreen onComplete={() => handleChallengeComplete('vault-heist', 400)} onBack={handleChallengeBack} />
   }
 
   return (
