@@ -6,10 +6,11 @@ import { RFIDScreen } from './components/screens/RFIDScreen'
 import { InfraredScreen } from './components/screens/InfraredScreen'
 import { GPIOScreen } from './components/screens/GPIOScreen'
 import { BadUSBScreen } from './components/screens/BadUSBScreen'
+import { EducationScreen } from './components/screens/EducationScreen'
 import { ChallengeScreen } from './components/screens/ChallengeScreen'
 import { Card } from './components/ui/card'
 
-type Screen = 'menu' | 'subghz' | 'rfid' | 'infrared' | 'gpio' | 'badusb' | 'challenge'
+type Screen = 'menu' | 'subghz' | 'rfid' | 'infrared' | 'gpio' | 'badusb' | 'education' | 'challenge'
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('menu')
@@ -48,6 +49,8 @@ function App() {
         return <GPIOScreen onBack={handleBackToMenu} />
       case 'badusb':
         return <BadUSBScreen onBack={handleBackToMenu} />
+      case 'education':
+        return <EducationScreen onBack={handleBackToMenu} />
       case 'challenge':
         return <ChallengeScreen onBack={handleBackToMenu} />
       default:
