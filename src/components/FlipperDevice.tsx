@@ -25,8 +25,8 @@ export function FlipperDevice({ screenContent, onNavigate }: FlipperDeviceProps)
         <div className="relative bg-primary rounded-3xl p-4 sm:p-6 shadow-2xl">
           <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-1 bg-primary-foreground/20 rounded-full" />
 
-          <div className="bg-background rounded-2xl p-3 sm:p-4 mb-4 sm:mb-6 min-h-[280px] sm:min-h-[320px] border-4 border-primary-foreground/10 shadow-inner overflow-hidden">
-            <div className="h-full flex flex-col">{screenContent}</div>
+          <div className="bg-background rounded-2xl p-3 sm:p-4 mb-4 sm:mb-6 h-[280px] sm:h-[320px] border-4 border-primary-foreground/10 shadow-inner overflow-hidden">
+            <div className="h-full overflow-y-auto">{screenContent}</div>
           </div>
 
           <div className="flex items-center justify-between gap-4 sm:gap-6">
