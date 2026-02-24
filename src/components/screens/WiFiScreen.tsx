@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
+import { ArrowsClockwise } from '@phosphor-icons/react'
 import { WiFiChannelMap } from '@/components/diagrams/WiFiChannelMap'
 import { ProtocolDiagram } from '@/components/diagrams/ProtocolDiagram'
 
@@ -236,6 +237,16 @@ export function WiFiScreen({ onBack }: WiFiScreenProps) {
                   )
                 })}
               </div>
+            )}
+
+            {!scanning && progress >= 100 && (
+              <button
+                onClick={startScan}
+                className="w-full p-2.5 rounded border border-primary/40 text-primary text-xs font-semibold hover:bg-primary/10 transition-colors flex items-center justify-center gap-1.5"
+              >
+                <ArrowsClockwise weight="bold" className="w-3.5 h-3.5" />
+                RESCAN
+              </button>
             )}
 
             {!scanning && detectedNetworks.length === 0 && (

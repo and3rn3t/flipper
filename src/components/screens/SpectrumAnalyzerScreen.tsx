@@ -125,8 +125,15 @@ export function SpectrumAnalyzerScreen({ onBack }: SpectrumAnalyzerScreenProps) 
         </div>
 
         <div className="p-3 rounded border border-primary/50 bg-primary/5">
-          <div className="text-xs text-foreground/50 mb-2">
-            {isRunning ? 'LIVE WATERFALL' : 'PAUSED'}
+          <div className="flex items-center justify-between mb-2">
+            <div className="text-xs text-foreground/50">
+              {isRunning ? 'LIVE WATERFALL' : 'PAUSED'}
+            </div>
+            {detectedSignals.length > 0 && (
+              <Badge variant="outline" className="text-[10px] border-primary/50 text-primary">
+                {detectedSignals.length} signals
+              </Badge>
+            )}
           </div>
           <WaterfallDisplay
             minFreq={currentBand.min}
