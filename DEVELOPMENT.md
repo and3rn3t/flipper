@@ -39,6 +39,7 @@ npm install
 - `npm run format` - Format code with Prettier
 - `npm run format:check` - Check code formatting without changes
 - `npm run type-check` - Run TypeScript type checking
+- `npm run ai:log "short title"` - Create a new AI log entry in docs/ai-history
 
 ## 🔧 Project Configuration
 
@@ -177,6 +178,9 @@ npm run dev
 ### Before Committing Code
 
 ```bash
+# If you used AI assistance (Copilot or Claude), create a log entry
+npm run ai:log "short description of what changed"
+
 # Check for type errors
 npm run type-check
 
@@ -188,6 +192,9 @@ npm run format
 
 # Optional: Verify formatting without changes
 npm run format:check
+
+# Then stage your changes and commit
+# Include a link to the AI log in your commit message if used
 ```
 
 ### Building for Production
