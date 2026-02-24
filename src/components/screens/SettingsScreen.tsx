@@ -11,7 +11,11 @@ const storageKeys = [
   { key: 'flipper-kv:subghz-saved', label: 'Sub-GHz Signals' },
   { key: 'flipper-kv:rfid-saved', label: 'RFID Cards' },
   { key: 'flipper-kv:ir-saved', label: 'IR Signals' },
-  { key: 'flipper-kv:challenge-scores', label: 'Challenge Progress' },
+  { key: 'flipper-kv:bt-saved', label: 'Bluetooth Devices' },
+  { key: 'flipper-kv:wifi-saved', label: 'WiFi Networks' },
+  { key: 'flipper-kv:zigbee-saved', label: 'Zigbee Devices' },
+  { key: 'flipper-kv:challenge-score', label: 'Challenge Score' },
+  { key: 'flipper-kv:completed-challenges', label: 'Challenge Progress' },
 ]
 
 const techStack = [

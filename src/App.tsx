@@ -146,7 +146,7 @@ function App() {
       case 'settings':
         return <SettingsScreen onBack={handleBackToMenu} />
       default:
-        return <MainMenuScreen selectedIndex={selectedMenuIndex} />
+        return <MainMenuScreen selectedIndex={selectedMenuIndex} onSelect={(id) => navigateToScreen(id as Screen)} />
     }
   }
 

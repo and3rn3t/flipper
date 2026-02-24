@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { describe, it, expect, vi } from 'vitest'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { MainMenuScreen, menuItems } from '../components/screens/MainMenuScreen'
 
 describe('MainMenuScreen', () => {
@@ -30,14 +30,10 @@ describe('MainMenuScreen', () => {
     expect(screen.getByText(/Press OK to select/)).toBeInTheDocument()
   })
 
-  it('accepts different selectedIndex values without crashing', () => {
-    const { unmount } = render(<MainMenuScreen selectedIndex={0} />)
-    unmount()
-
-    const { unmount: unmount2 } = render(<MainMenuScreen selectedIndex={5} />)
-    unmount2()
-
-    render(<MainMenuScreen selectedIndex={10} />)
-    expect(screen.getByText('MAIN MENU')).toBeInTheDocument()
+  it('calls onSelect when a menu item is clicked', () => {
+    const onSelect = vi.fn()
+    render(<MainMenuScreen selectedIndex={0} onSelect={onSelect} />)
+    fireEvent.click(screen.getByText('Sub-GHz'))
+    expect(onSelect).toHaveBeenCalledWith('subghz')
   })
 })

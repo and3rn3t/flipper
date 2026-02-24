@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 
 interface MainMenuScreenProps {
   selectedIndex: number
+  onSelect?: (id: string) => void
 }
 
 const menuItems = [
@@ -21,7 +22,7 @@ const menuItems = [
   { id: 'settings', label: 'Settings', icon: GearSix, description: 'About & Data' },
 ]
 
-export function MainMenuScreen({ selectedIndex }: MainMenuScreenProps) {
+export function MainMenuScreen({ selectedIndex, onSelect }: MainMenuScreenProps) {
   return (
     <div className="h-full flex flex-col font-mono">
       <div className="border-b border-foreground/20 pb-2 mb-3">
@@ -36,6 +37,10 @@ export function MainMenuScreen({ selectedIndex }: MainMenuScreenProps) {
           return (
             <motion.div
               key={item.id}
+              role="button"
+              tabIndex={0}
+              onClick={() => onSelect?.(item.id)}
+              onKeyDown={(e) => { if (e.key === 'Enter') onSelect?.(item.id) }}
               animate={{
                 backgroundColor: isSelected ? 'rgba(239, 108, 34, 0.2)' : 'rgba(0, 0, 0, 0)',
                 borderColor: isSelected ? 'rgb(239, 108, 34)' : 'rgba(37, 171, 58, 0.2)',

@@ -31,6 +31,15 @@ describe('SettingsScreen', () => {
     expect(screen.getByText(/Keyboard Shortcuts/i)).toBeInTheDocument()
   })
 
+  it('lists correct storage categories', () => {
+    setup()
+    expect(screen.getByText('Sub-GHz Signals')).toBeInTheDocument()
+    expect(screen.getByText('RFID Cards')).toBeInTheDocument()
+    expect(screen.getByText('IR Signals')).toBeInTheDocument()
+    expect(screen.getByText('Challenge Score')).toBeInTheDocument()
+    expect(screen.getByText('Challenge Progress')).toBeInTheDocument()
+  })
+
   it('shows footer with current year', () => {
     setup()
     expect(screen.getByText(/2026/)).toBeInTheDocument()

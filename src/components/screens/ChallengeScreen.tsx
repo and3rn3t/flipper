@@ -89,13 +89,11 @@ export function ChallengeScreen({ onBack }: ChallengeScreenProps) {
   const [selectedChallenge, setSelectedChallenge] = useState<string | null>(null)
 
   const handleChallengeComplete = (challengeId: string, points: number) => {
-    setCompletedChallenges((current = []) => {
-      if (!current.includes(challengeId)) {
-        return [...current, challengeId]
-      }
-      return current
-    })
-    setTotalScore((current = 0) => current + points)
+    const alreadyCompleted = (completedChallenges ?? []).includes(challengeId)
+    if (!alreadyCompleted) {
+      setCompletedChallenges((current = []) => [...current, challengeId])
+      setTotalScore((current = 0) => current + points)
+    }
     setSelectedChallenge(null)
   }
 
