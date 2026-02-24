@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Warning, Keyboard, Play, ArrowLeft } from '@phosphor-icons/react'
 import { Badge } from '@/components/ui/badge'
+import { KeystrokeFlow } from '@/components/diagrams/KeystrokeFlow'
 
 interface BadUSBScreenProps {
   onBack: () => void
@@ -221,6 +222,7 @@ export function BadUSBScreen({ onBack }: BadUSBScreenProps) {
 
               <div className="p-2 rounded border border-foreground/20 bg-background/50">
                 <div className="text-[10px] text-foreground/50 mb-1">HOW IT WORKS</div>
+                <KeystrokeFlow className="mb-2" />
                 <div className="text-[10px] text-foreground/70 space-y-0.5">
                   <div>• Emulates USB HID keyboard</div>
                   <div>• Uses DuckyScript language</div>
@@ -286,6 +288,7 @@ export function BadUSBScreen({ onBack }: BadUSBScreenProps) {
               className="space-y-3"
             >
               {/* Script with highlight */}
+              <KeystrokeFlow steps={selectedPayload.actions} currentStep={currentLine} className="rounded border border-foreground/20 mb-2" />
               <div className="rounded border border-foreground/20 bg-background/80 overflow-hidden">
                 <div className="text-[10px] text-foreground/50 px-2 py-1 border-b border-foreground/10 bg-foreground/5 flex items-center justify-between">
                   <span>EXECUTING PAYLOAD</span>

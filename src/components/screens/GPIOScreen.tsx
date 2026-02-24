@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Cpu, Lightning, ArrowLeft } from '@phosphor-icons/react'
+import { GPIOPinout } from '@/components/diagrams/GPIOPinout'
 
 interface GPIOScreenProps {
   onBack: () => void
@@ -174,6 +175,9 @@ export function GPIOScreen({ onBack }: GPIOScreenProps) {
               exit={{ opacity: 0 }}
               className="space-y-3"
             >
+              {/* Pinout Diagram */}
+              <GPIOPinout activePins={pins.filter(p => p.state !== 'OFF' && p.type === 'gpio').map(p => p.id)} className="rounded border border-foreground/20" />
+
               {/* Pin Grid */}
               <div className="p-2 rounded border border-foreground/20 bg-background/50">
                 <div className="text-xs text-foreground/50 mb-2">PINOUT — TAP GPIO PINS TO TOGGLE</div>

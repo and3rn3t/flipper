@@ -167,7 +167,7 @@ export function SettingsScreen({ onBack }: SettingsScreenProps) {
       </div>
 
       <div className="border-t border-foreground/20 pt-2 mt-3">
-        <div className="text-xs text-foreground/40">Flipper Zero Lab • 2025</div>
+        <div className="text-xs text-foreground/40">Flipper Zero Lab • 2026</div>
       </div>
     </div>
   )
