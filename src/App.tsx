@@ -4,13 +4,16 @@ import { MainMenuScreen, menuItems } from './components/screens/MainMenuScreen'
 import { SubGHzScreen } from './components/screens/SubGHzScreen'
 import { RFIDScreen } from './components/screens/RFIDScreen'
 import { InfraredScreen } from './components/screens/InfraredScreen'
+import { BluetoothScreen } from './components/screens/BluetoothScreen'
+import { WiFiScreen } from './components/screens/WiFiScreen'
+import { ZigbeeScreen } from './components/screens/ZigbeeScreen'
 import { GPIOScreen } from './components/screens/GPIOScreen'
 import { BadUSBScreen } from './components/screens/BadUSBScreen'
 import { EducationScreen } from './components/screens/EducationScreen'
 import { ChallengeScreen } from './components/screens/ChallengeScreen'
 import { Card } from './components/ui/card'
 
-type Screen = 'menu' | 'subghz' | 'rfid' | 'infrared' | 'gpio' | 'badusb' | 'education' | 'challenge'
+type Screen = 'menu' | 'subghz' | 'rfid' | 'infrared' | 'bluetooth' | 'wifi' | 'zigbee' | 'gpio' | 'badusb' | 'education' | 'challenge'
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('menu')
@@ -45,6 +48,12 @@ function App() {
         return <RFIDScreen onBack={handleBackToMenu} />
       case 'infrared':
         return <InfraredScreen onBack={handleBackToMenu} />
+      case 'bluetooth':
+        return <BluetoothScreen onBack={handleBackToMenu} />
+      case 'wifi':
+        return <WiFiScreen onBack={handleBackToMenu} />
+      case 'zigbee':
+        return <ZigbeeScreen onBack={handleBackToMenu} />
       case 'gpio':
         return <GPIOScreen onBack={handleBackToMenu} />
       case 'badusb':
