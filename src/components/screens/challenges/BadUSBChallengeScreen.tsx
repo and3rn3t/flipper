@@ -71,7 +71,7 @@ export function BadUSBChallengeScreen({ onComplete, onBack }: BadUSBChallengeScr
                 initial={{ opacity: 0.4 }}
                 animate={{
                   opacity: currentStep > index ? 1 : 0.4,
-                  color: currentStep > index ? 'oklch(0.65 0.19 145)' : 'oklch(0.50 0.15 145)'
+                  color: currentStep > index ? 'rgb(37, 171, 58)' : 'rgb(16, 120, 35)'
                 }}
                 className="text-xs font-mono flex items-center gap-2"
               >

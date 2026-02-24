@@ -208,7 +208,7 @@ export function InfraredScreen({ onBack }: InfraredScreenProps) {
                     {deviceConfigs[selectedDevice].buttons.map((btn) => (
                       <motion.button
                         key={btn.label}
-                        whileTap={{ scale: 0.93, backgroundColor: 'oklch(0.72 0.19 70 / 0.3)' }}
+                        whileTap={{ scale: 0.93, backgroundColor: 'rgba(237, 137, 0, 0.3)' }}
                         onClick={() => sendButton(selectedDevice, btn)}
                         className={`p-2.5 rounded border border-foreground/25 bg-background/50 text-xs text-foreground/80 hover:bg-primary/10 hover:border-primary/40 hover:text-primary transition-colors font-semibold ${btn.wide ? 'col-span-2' : ''}`}
                       >

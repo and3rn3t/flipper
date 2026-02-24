@@ -282,8 +282,8 @@ export function EducationScreen({ onBack }: EducationScreenProps) {
                 key={topic.id}
                 onClick={() => setSelectedTopic(topic.id as Topic)}
                 animate={{
-                  backgroundColor: isSelected ? 'oklch(0.68 0.18 45 / 0.15)' : 'transparent',
-                  borderColor: isSelected ? 'oklch(0.68 0.18 45)' : 'oklch(0.65 0.19 145 / 0.2)',
+                  backgroundColor: isSelected ? 'rgba(239, 108, 34, 0.15)' : 'rgba(0, 0, 0, 0)',
+                  borderColor: isSelected ? 'rgb(239, 108, 34)' : 'rgba(37, 171, 58, 0.2)',
                 }}
                 className="w-full p-2 rounded border flex flex-col items-center gap-1 transition-all hover:border-primary/50"
               >

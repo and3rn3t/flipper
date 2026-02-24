@@ -37,8 +37,8 @@ export function MainMenuScreen({ selectedIndex }: MainMenuScreenProps) {
             <motion.div
               key={item.id}
               animate={{
-                backgroundColor: isSelected ? 'oklch(0.68 0.18 45 / 0.2)' : 'transparent',
-                borderColor: isSelected ? 'oklch(0.68 0.18 45)' : 'oklch(0.65 0.19 145 / 0.2)',
+                backgroundColor: isSelected ? 'rgba(239, 108, 34, 0.2)' : 'rgba(0, 0, 0, 0)',
+                borderColor: isSelected ? 'rgb(239, 108, 34)' : 'rgba(37, 171, 58, 0.2)',
               }}
               className={cn(
                 'p-3 rounded border-2 cursor-pointer transition-colors',
