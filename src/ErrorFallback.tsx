@@ -1,38 +1,54 @@
-import { Alert, AlertTitle, AlertDescription } from "./components/ui/alert";
+import { Warning, ArrowCounterClockwise, House } from "@phosphor-icons/react";
 import { Button } from "./components/ui/button";
 
-import { AlertTriangleIcon, RefreshCwIcon } from "lucide-react";
-
 export const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) => {
-  // When encountering an error in the development mode, rethrow it and don't display the boundary.
-  // The parent UI will take care of showing a more helpful dialog.
   if (import.meta.env.DEV) throw error;
 
+  const handleReturnToMenu = () => {
+    window.location.hash = '';
+    resetErrorBoundary();
+  };
+
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <Alert variant="destructive" className="mb-6">
-          <AlertTriangleIcon />
-          <AlertTitle>Something went wrong</AlertTitle>
-          <AlertDescription>
-            Something unexpected happened while running the application. The error details are shown below.</AlertDescription>
-        </Alert>
-        
-        <div className="bg-card border rounded-lg p-4 mb-6">
-          <h3 className="font-semibold text-sm text-muted-foreground mb-2">Error Details:</h3>
-          <pre className="text-xs text-destructive bg-muted/50 p-3 rounded border overflow-auto max-h-32">
-            {error.message}
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center p-4">
+      <div className="w-full max-w-md space-y-4">
+        <div className="flex flex-col items-center gap-3 text-center">
+          <div className="w-12 h-12 rounded-full bg-destructive/20 border border-destructive/40 flex items-center justify-center">
+            <Warning size={24} weight="bold" className="text-destructive" />
+          </div>
+          <h1 className="text-xl font-bold font-mono text-primary">System Error</h1>
+          <p className="text-xs text-foreground/60">
+            An unexpected fault occurred. Review the diagnostic output below.
+          </p>
+        </div>
+
+        <div className="bg-card border border-border rounded-lg p-4">
+          <p className="text-[10px] font-mono text-foreground/40 mb-2 uppercase tracking-wider">
+            Diagnostic Output
+          </p>
+          <pre className="text-xs font-mono text-destructive bg-muted/30 p-3 rounded border border-border overflow-auto max-h-32">
+{error.message}
           </pre>
         </div>
-        
-        <Button 
-          onClick={resetErrorBoundary} 
-          className="w-full"
-          variant="outline"
-        >
-          <RefreshCwIcon />
-          Try Again
-        </Button>
+
+        <div className="flex gap-2">
+          <Button
+            onClick={handleReturnToMenu}
+            variant="outline"
+            className="flex-1"
+          >
+            <House size={16} weight="bold" />
+            Main Menu
+          </Button>
+          <Button
+            onClick={resetErrorBoundary}
+            variant="outline"
+            className="flex-1"
+          >
+            <ArrowCounterClockwise size={16} weight="bold" />
+            Retry
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -18,6 +18,6 @@ describe('App', () => {
   it('renders the info cards', () => {
     render(<App />)
     expect(screen.getByText('About Flipper Zero')).toBeInTheDocument()
-    expect(screen.getByText('How to Use This Simulator')).toBeInTheDocument()
+    expect(screen.getByText('Controls')).toBeInTheDocument()
   })
 })
