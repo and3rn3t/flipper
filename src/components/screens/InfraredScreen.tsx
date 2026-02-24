@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Television, Snowflake, Fan, Play } from '@phosphor-icons/react'
 import { Badge } from '@/components/ui/badge'
+import { InfraredTiming } from '@/components/diagrams/InfraredTiming'
+import { ProtocolDiagram } from '@/components/diagrams/ProtocolDiagram'
 
 interface InfraredScreenProps {
   onBack: () => void
@@ -114,15 +116,18 @@ export function InfraredScreen({ onBack }: InfraredScreenProps) {
                   <div className="text-sm text-foreground">NEC</div>
                 </div>
 
-                <div className="p-3 rounded border border-foreground/20 bg-background/50">
-                  <div className="text-xs text-foreground/50 mb-1">ADDRESS</div>
-                  <div className="text-sm text-foreground font-mono">0x04</div>
-                </div>
+                <InfraredTiming protocol="nec" />
 
-                <div className="p-3 rounded border border-foreground/20 bg-background/50">
-                  <div className="text-xs text-foreground/50 mb-1">COMMAND</div>
-                  <div className="text-sm text-foreground font-mono">0x08</div>
-                </div>
+                <ProtocolDiagram
+                  title="NEC Protocol Data"
+                  fields={[
+                    { label: 'Address', bits: 8, value: '0x04' },
+                    { label: 'Address Inv', bits: 8, value: '0xFB' },
+                    { label: 'Command', bits: 8, value: '0x08' },
+                    { label: 'Command Inv', bits: 8, value: '0xF7' },
+                  ]}
+                  totalBits={32}
+                />
               </motion.div>
             )}
           </motion.div>

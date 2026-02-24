@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
+import { FrequencySpectrum } from '@/components/diagrams/FrequencySpectrum'
+import { SignalWaveform } from '@/components/diagrams/SignalWaveform'
+import { ProtocolDiagram } from '@/components/diagrams/ProtocolDiagram'
 
 interface SubGHzScreenProps {
   onBack: () => void
@@ -84,6 +87,13 @@ export function SubGHzScreen({ onBack }: SubGHzScreenProps) {
               <div className="text-xs text-primary mt-1">{progress}%</div>
             </div>
 
+            {scanning && (
+              <FrequencySpectrum 
+                activeFrequencies={detectedSignals.map(s => parseFloat(s.freq))} 
+                className="my-2"
+              />
+            )}
+
             {detectedSignals.length > 0 && (
               <div className="space-y-2">
                 <div className="text-xs text-foreground/60">DETECTED SIGNALS:</div>
@@ -92,27 +102,29 @@ export function SubGHzScreen({ onBack }: SubGHzScreenProps) {
                     key={idx}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="p-3 rounded border border-primary/30 bg-primary/5"
+                    className="space-y-2"
                   >
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm text-primary font-semibold">{signal.freq} MHz</span>
-                      <Badge variant="outline" className="text-xs border-primary/50 text-primary">
-                        {signal.protocol}
-                      </Badge>
+                    <div className="p-3 rounded border border-primary/30 bg-primary/5">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm text-primary font-semibold">{signal.freq} MHz</span>
+                        <Badge variant="outline" className="text-xs border-primary/50 text-primary">
+                          {signal.protocol}
+                        </Badge>
+                      </div>
+                      <div className="h-12">
+                        <SignalWaveform type="amplitude" className="w-full h-full" />
+                      </div>
                     </div>
-                    <div className="h-8 flex items-center gap-1">
-                      {Array.from({ length: 20 }).map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="flex-1 bg-primary/30 rounded-sm"
-                          style={{ height: `${Math.random() * 100}%` }}
-                          animate={{
-                            height: [`${Math.random() * 100}%`, `${Math.random() * 100}%`]
-                          }}
-                          transition={{ duration: 0.5, repeat: scanning ? Infinity : 0 }}
-                        />
-                      ))}
-                    </div>
+                    {idx === 0 && signal.protocol === 'Princeton' && (
+                      <ProtocolDiagram
+                        title="Princeton 24-bit Protocol"
+                        fields={[
+                          { label: 'Sync', bits: 4, value: '0xF' },
+                          { label: 'Address', bits: 20, value: '0x3A92C' },
+                        ]}
+                        totalBits={24}
+                      />
+                    )}
                   </motion.div>
                 ))}
               </div>

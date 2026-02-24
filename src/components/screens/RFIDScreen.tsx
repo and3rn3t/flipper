@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { CreditCard } from '@phosphor-icons/react'
+import { RFIDStructure } from '@/components/diagrams/RFIDStructure'
+import { ProtocolDiagram } from '@/components/diagrams/ProtocolDiagram'
 
 interface RFIDScreenProps {
   onBack: () => void
@@ -96,6 +98,26 @@ export function RFIDScreen({ onBack }: RFIDScreenProps) {
               <div className="text-xs text-foreground/50 mb-1">MEMORY</div>
               <div className="text-sm text-foreground">{cardData.sectors} sectors available</div>
             </div>
+
+            {cardData.type === 'MIFARE Classic 1K' && (
+              <div className="p-3 rounded border border-foreground/20 bg-background/50">
+                <RFIDStructure cardType="mifare" />
+              </div>
+            )}
+
+            {cardData.type === 'MIFARE Ultralight' && (
+              <ProtocolDiagram
+                title="MIFARE Ultralight Structure"
+                fields={[
+                  { label: 'UID', bits: 7 },
+                  { label: 'Data', bits: 16 },
+                  { label: 'Lock', bits: 3 },
+                  { label: 'OTP', bits: 4 },
+                  { label: 'Config', bits: 2 },
+                ]}
+                totalBits={32}
+              />
+            )}
 
             <button
               onClick={() => {
