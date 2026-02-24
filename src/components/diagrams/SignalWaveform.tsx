@@ -10,7 +10,7 @@ interface SignalWaveformProps {
 
 export function SignalWaveform({ type, animated = true, color = 'oklch(0.68 0.18 45)', className = '' }: SignalWaveformProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationFrameRef = useRef<number>()
+  const animationFrameRef = useRef<number | undefined>(undefined)
   const phaseRef = useRef(0)
 
   useEffect(() => {

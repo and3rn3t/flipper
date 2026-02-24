@@ -14,7 +14,7 @@ export function FrequencySpectrum({
   className = '' 
 }: FrequencySpectrumProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationFrameRef = useRef<number>()
+  const animationFrameRef = useRef<number | undefined>(undefined)
   const noiseRef = useRef<number[]>([])
 
   useEffect(() => {

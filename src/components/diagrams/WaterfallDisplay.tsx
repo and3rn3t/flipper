@@ -16,7 +16,7 @@ export function WaterfallDisplay({
   className = '' 
 }: WaterfallDisplayProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationFrameRef = useRef<number>()
+  const animationFrameRef = useRef<number | undefined>(undefined)
   const dataBufferRef = useRef<ImageData | null>(null)
   const timeRef = useRef(0)
 

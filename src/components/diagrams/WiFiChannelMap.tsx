@@ -14,7 +14,7 @@ interface WiFiChannelMapProps {
 
 export function WiFiChannelMap({ networks, className = '' }: WiFiChannelMapProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationFrameRef = useRef<number>()
+  const animationFrameRef = useRef<number | undefined>(undefined)
   const pulseRef = useRef(0)
 
   useEffect(() => {

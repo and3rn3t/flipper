@@ -1,19 +1,23 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowLeft, BookOpen, Broadcast, CreditCard, LightbulbFilament, Cpu, Keyboard, ShieldCheck } from '@phosphor-icons/react'
+import { ArrowLeft, BookOpen, Broadcast, CreditCard, LightbulbFilament, Cpu, Keyboard, ShieldCheck, BluetoothConnected, WifiHigh, Graph, ChartLine } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 
 interface EducationScreenProps {
   onBack: () => void
 }
 
-type Topic = 'overview' | 'subghz' | 'rfid' | 'infrared' | 'gpio' | 'badusb' | 'security'
+type Topic = 'overview' | 'subghz' | 'rfid' | 'infrared' | 'bluetooth' | 'wifi' | 'zigbee' | 'spectrum' | 'gpio' | 'badusb' | 'security'
 
 const topics = [
   { id: 'overview', label: 'Overview', icon: BookOpen },
   { id: 'subghz', label: 'Sub-GHz', icon: Broadcast },
   { id: 'rfid', label: 'RFID/NFC', icon: CreditCard },
   { id: 'infrared', label: 'Infrared', icon: LightbulbFilament },
+  { id: 'bluetooth', label: 'Bluetooth', icon: BluetoothConnected },
+  { id: 'wifi', label: 'WiFi', icon: WifiHigh },
+  { id: 'zigbee', label: 'Zigbee', icon: Graph },
+  { id: 'spectrum', label: 'Spectrum', icon: ChartLine },
   { id: 'gpio', label: 'GPIO', icon: Cpu },
   { id: 'badusb', label: 'Bad USB', icon: Keyboard },
   { id: 'security', label: 'Security', icon: ShieldCheck },
@@ -118,6 +122,90 @@ const educationContent: Record<Topic, { title: string; sections: { heading: stri
       {
         heading: 'Hardware Hacking',
         content: 'Connect to PCB test points, debug firmware, sniff communication between components. Essential for reverse engineering hardware.'
+      }
+    ]
+  },
+  bluetooth: {
+    title: 'Bluetooth & BLE',
+    sections: [
+      {
+        heading: 'Bluetooth Versions',
+        content: 'Classic Bluetooth (BR/EDR) operates at 2.4 GHz for audio streaming and file transfers. Bluetooth Low Energy (BLE) uses minimal power for IoT devices, beacons, and wearables.'
+      },
+      {
+        heading: 'BLE Advertising',
+        content: 'BLE devices broadcast advertisement packets containing device name, services, and manufacturer data. Scanning these packets reveals nearby devices and their capabilities.'
+      },
+      {
+        heading: 'GATT Services',
+        content: 'The Generic Attribute Profile defines how BLE devices expose data. Services contain characteristics (readable/writable values). Standard profiles exist for heart rate, battery, and more.'
+      },
+      {
+        heading: 'Security Considerations',
+        content: 'BLE pairing can use Just Works (no authentication), Passkey, or Numeric Comparison methods. Older devices with weak pairing are vulnerable to eavesdropping and MITM attacks.'
+      }
+    ]
+  },
+  wifi: {
+    title: 'WiFi Analysis',
+    sections: [
+      {
+        heading: '802.11 Standards',
+        content: 'WiFi operates on 2.4 GHz (802.11b/g/n) and 5 GHz (802.11a/n/ac/ax) bands. Each band has multiple channels. Understanding channel allocation is key to network analysis.'
+      },
+      {
+        heading: 'Network Discovery',
+        content: 'Access points broadcast beacon frames with SSID, channel, security type, and supported rates. Passive scanning listens for beacons; active scanning sends probe requests.'
+      },
+      {
+        heading: 'Security Protocols',
+        content: 'WPA3 is the current standard, using SAE (Simultaneous Authentication of Equals). WPA2 uses a 4-way handshake with PSK or Enterprise (802.1X). WEP and open networks are insecure.'
+      },
+      {
+        heading: 'Frame Structure',
+        content: 'WiFi frames have a MAC header (addresses, frame type), body (data/management payload), and FCS (error check). Management frames handle association, authentication, and beacons.'
+      }
+    ]
+  },
+  zigbee: {
+    title: 'Zigbee & Mesh',
+    sections: [
+      {
+        heading: 'Zigbee Overview',
+        content: 'IEEE 802.15.4 based protocol operating at 2.4 GHz with mesh networking. Designed for low-power IoT: smart home devices, industrial sensors, and building automation.'
+      },
+      {
+        heading: 'Network Topology',
+        content: 'Three device types: Coordinator (forms and manages network), Router (extends range and relays messages), and End Device (low-power sensors/actuators that sleep between transmissions).'
+      },
+      {
+        heading: 'Mesh Networking',
+        content: 'Messages hop between routers to reach distant devices. Self-healing: if a router fails, the network finds alternative paths. PAN ID identifies each network.'
+      },
+      {
+        heading: 'Security Model',
+        content: 'Uses AES-128 encryption with network keys distributed by the Trust Center (coordinator). Key transport during joining is a known vulnerability in some implementations.'
+      }
+    ]
+  },
+  spectrum: {
+    title: 'Spectrum Analysis',
+    sections: [
+      {
+        heading: 'What is Spectrum Analysis?',
+        content: 'Visualizing radio frequency energy across a range of frequencies. Reveals active transmitters, interference sources, and signal characteristics. Essential for RF troubleshooting.'
+      },
+      {
+        heading: 'Frequency Bands',
+        content: 'Sub-1 GHz (IoT, remotes), 2.4 GHz (WiFi, Bluetooth, Zigbee, microwaves), 5 GHz (WiFi, radar). Each band has regulatory limits on power and usage.'
+      },
+      {
+        heading: 'Waterfall Display',
+        content: 'A time-frequency visualization where color represents signal strength. Scrolls over time, showing how RF activity changes. Useful for identifying intermittent transmissions.'
+      },
+      {
+        heading: 'Signal Characteristics',
+        content: 'Key parameters: center frequency, bandwidth, modulation type, signal strength (dBm), and duty cycle. Understanding these helps identify and classify unknown signals.'
       }
     ]
   },

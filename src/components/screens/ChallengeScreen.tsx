@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Trophy, Lock, CheckCircle, XCircle, Star } from '@phosphor-icons/react'
-import { useKV } from '@github/spark/hooks'
+import { Trophy, Lock, CheckCircle, XCircle, Star, ArrowClockwise } from '@phosphor-icons/react'
+import { useLocalKV } from '@/hooks/use-local-kv'
 import { cn } from '@/lib/utils'
 import { RFIDChallengeScreen } from './challenges/RFIDChallengeScreen'
 import { SubGHzChallengeScreen } from './challenges/SubGHzChallengeScreen'
@@ -84,8 +84,8 @@ export const challenges: Challenge[] = [
 ]
 
 export function ChallengeScreen({ onBack }: ChallengeScreenProps) {
-  const [completedChallenges, setCompletedChallenges] = useKV<string[]>('completed-challenges', [])
-  const [totalScore, setTotalScore] = useKV<number>('challenge-score', 0)
+  const [completedChallenges, setCompletedChallenges] = useLocalKV<string[]>('completed-challenges', [])
+  const [totalScore, setTotalScore] = useLocalKV<number>('challenge-score', 0)
   const [selectedChallenge, setSelectedChallenge] = useState<string | null>(null)
 
   const handleChallengeComplete = (challengeId: string, points: number) => {
@@ -153,8 +153,17 @@ export function ChallengeScreen({ onBack }: ChallengeScreenProps) {
             </div>
             <div className="text-lg font-bold text-primary">{totalScore}</div>
           </div>
-          <div className="text-xs text-foreground/60">
-            {completedChallenges?.length || 0}/{challenges.length} Challenges Completed
+          <div className="text-xs text-foreground/60 flex items-center justify-between">
+            <span>{completedChallenges?.length || 0}/{challenges.length} Challenges Completed</span>
+            {(completedChallenges?.length || 0) > 0 && (
+              <button
+                onClick={() => { setCompletedChallenges([]); setTotalScore(0) }}
+                className="flex items-center gap-1 text-foreground/40 hover:text-destructive transition-colors"
+              >
+                <ArrowClockwise weight="bold" className="w-3 h-3" />
+                <span>Reset</span>
+              </button>
+            )}
           </div>
         </motion.div>
 
@@ -173,11 +182,11 @@ export function ChallengeScreen({ onBack }: ChallengeScreenProps) {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
-                onClick={() => !isCompleted && setSelectedChallenge(challenge.id)}
+                onClick={() => setSelectedChallenge(challenge.id)}
                 className={cn(
                   'p-3 rounded border-2 cursor-pointer transition-all',
                   isCompleted 
-                    ? 'border-foreground/20 bg-foreground/5 opacity-60' 
+                    ? 'border-green-400/20 bg-green-400/5 hover:border-green-400/40 hover:bg-green-400/10' 
                     : 'border-primary/30 bg-primary/5 hover:border-primary hover:bg-primary/10'
                 )}
               >
@@ -203,6 +212,12 @@ export function ChallengeScreen({ onBack }: ChallengeScreenProps) {
                       <span className={cn('text-xs font-semibold', difficultyColor)}>
                         {challenge.difficulty}
                       </span>
+                      {isCompleted && (
+                        <>
+                          <span className="text-xs text-foreground/20">•</span>
+                          <span className="text-xs text-green-400/70">Replay</span>
+                        </>
+                      )}
                     </div>
                   </div>
                   <div className="flex flex-col items-end gap-1">

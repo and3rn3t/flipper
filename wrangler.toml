@@ -1,0 +1,11 @@
+name = "flipper-zero-lab"
+compatibility_date = "2025-01-01"
+
+# Cloudflare Pages configuration
+# Connect your GitHub repo to Cloudflare Pages with:
+#   Build command: npm run build
+#   Build output directory: dist
+#   Node.js version: 20
+
+[site]
+bucket = "./dist"
