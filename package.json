@@ -12,6 +12,7 @@
         "format": "prettier --write .",
         "format:check": "prettier --check .",
         "type-check": "tsc -b --noCheck",
+        "ai:log": "node scripts/create-ai-log.js",
         "optimize": "vite optimize",
         "preview": "vite preview"
     },

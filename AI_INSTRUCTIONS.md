@@ -15,6 +15,17 @@ Sources (most recent official docs):
 - Focus: skills (capabilities) and mood (tone).
 - Goal: higher quality outputs, fewer iterations, and lower risk of incorrect changes.
 
+## Repo-specific conventions (Flipper)
+
+- UI: prefer existing components in src/components/ui before creating new ones.
+- Screens: follow patterns in src/components/screens and keep layout stable unless asked.
+- Diagrams: keep sizing and color tokens consistent with current diagrams.
+- Styling: use the Tailwind v4 utility classes and the `cn` helper in src/lib/utils.
+- Imports: use the @/* alias where it matches existing usage.
+- Dependencies: do not add new packages unless explicitly approved.
+
+For Copilot Chat, repo-level defaults also live in .github/copilot-instructions.md.
+
 ## Universal prompting rules
 
 1. Define the task outcome clearly (what a correct result looks like).
@@ -164,6 +175,12 @@ Verification:
 - Do not include private data in prompts.
 - Avoid copying code from unknown sources without checking licenses.
 - If a suggestion seems risky or off-scope, request a safer alternative.
+
+## Prompt history logging
+
+- Store AI session logs in docs/ai-history using the template.
+- Keep logs short and link to related PRs or commits.
+- Add the log file link in the PR template under "AI Assistance".
 
 ## Example prompt
 
