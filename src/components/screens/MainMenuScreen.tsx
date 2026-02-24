@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Broadcast, CreditCard, LightbulbFilament, Cpu, Keyboard } from '@phosphor-icons/react'
+import { Broadcast, CreditCard, LightbulbFilament, Cpu, Keyboard, Trophy } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 
 interface MainMenuScreenProps {
@@ -12,6 +12,7 @@ const menuItems = [
   { id: 'infrared', label: 'Infrared', icon: LightbulbFilament, description: 'Universal Remote' },
   { id: 'gpio', label: 'GPIO', icon: Cpu, description: 'Hardware Interface' },
   { id: 'badusb', label: 'Bad USB', icon: Keyboard, description: 'USB Emulation' },
+  { id: 'challenge', label: 'Challenges', icon: Trophy, description: 'Security Puzzles' },
 ]
 
 export function MainMenuScreen({ selectedIndex }: MainMenuScreenProps) {
