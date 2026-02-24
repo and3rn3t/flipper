@@ -238,6 +238,7 @@ npm run dev
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [ESLint Rules](https://eslint.org/docs/latest/rules/)
+- [AI Instructions](AI_INSTRUCTIONS.md)
 
 ---
 
