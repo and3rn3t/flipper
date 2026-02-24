@@ -31,9 +31,9 @@ describe('App', () => {
     expect(screen.getByText('Controls')).toBeInTheDocument()
   })
 
-  it('renders all 11 menu items', () => {
+  it('renders all 12 menu items', () => {
     render(<App />)
-    const labels = ['Sub-GHz', 'Spectrum', 'RFID/NFC', 'Infrared', 'Bluetooth', 'WiFi', 'Zigbee', 'GPIO', 'Bad USB', 'Education', 'Challenges']
+    const labels = ['Sub-GHz', 'Spectrum', 'RFID/NFC', 'Infrared', 'Bluetooth', 'WiFi', 'Zigbee', 'GPIO', 'Bad USB', 'Education', 'Challenges', 'Settings']
     for (const label of labels) {
       expect(screen.getByText(label)).toBeInTheDocument()
     }

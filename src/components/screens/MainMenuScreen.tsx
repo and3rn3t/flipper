@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Broadcast, CreditCard, LightbulbFilament, Cpu, Keyboard, Trophy, BookOpen, BluetoothConnected, WifiHigh, Graph, ChartLine } from '@phosphor-icons/react'
+import { Broadcast, CreditCard, LightbulbFilament, Cpu, Keyboard, Trophy, BookOpen, BluetoothConnected, WifiHigh, Graph, ChartLine, GearSix } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 
 interface MainMenuScreenProps {
@@ -18,6 +18,7 @@ const menuItems = [
   { id: 'badusb', label: 'Bad USB', icon: Keyboard, description: 'USB Emulation' },
   { id: 'education', label: 'Education', icon: BookOpen, description: 'Learn & Understand' },
   { id: 'challenge', label: 'Challenges', icon: Trophy, description: 'Security Puzzles' },
+  { id: 'settings', label: 'Settings', icon: GearSix, description: 'About & Data' },
 ]
 
 export function MainMenuScreen({ selectedIndex }: MainMenuScreenProps) {

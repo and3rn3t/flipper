@@ -4,6 +4,7 @@ import { Television, Snowflake, Fan, Play, FloppyDisk, Trash, ArrowsClockwise } 
 import { Badge } from '@/components/ui/badge'
 import { InfraredTiming } from '@/components/diagrams/InfraredTiming'
 import { ProtocolDiagram } from '@/components/diagrams/ProtocolDiagram'
+import { useLocalKV } from '@/hooks/use-local-kv'
 
 interface InfraredScreenProps {
   onBack: () => void
@@ -108,7 +109,7 @@ export function InfraredScreen({ onBack }: InfraredScreenProps) {
   const [selectedDevice, setSelectedDevice] = useState<string | null>(null)
   const [lastSignal, setLastSignal] = useState<IRSignal | null>(null)
   const [transmitting, setTransmitting] = useState(false)
-  const [savedSignals, setSavedSignals] = useState<IRSignal[]>([])
+  const [savedSignals, setSavedSignals] = useLocalKV<IRSignal[]>('ir-saved', [])
   const [capturedSignal, setCapturedSignal] = useState<IRSignal | null>(null)
   const [capturing, setCapturing] = useState(false)
 

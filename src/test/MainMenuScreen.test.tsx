@@ -16,8 +16,8 @@ describe('MainMenuScreen', () => {
     }
   })
 
-  it('has exactly 11 menu items', () => {
-    expect(menuItems).toHaveLength(11)
+  it('has exactly 12 menu items', () => {
+    expect(menuItems).toHaveLength(12)
   })
 
   it('each menu item has a unique id', () => {

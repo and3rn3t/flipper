@@ -1,29 +1,63 @@
-# ✨ Welcome to Your Spark Template
+# Flipper Zero Lab
 
-You've just launched your brand-new Spark Template Codespace — everything’s fired up and ready for you to explore, build, and create with Spark!
+An interactive experimentation dashboard showcasing the [Flipper Zero](https://flipperzero.one/)'s capabilities through simulations and educational content. Built as a portfolio project - no hardware required.
 
-This template is your blank canvas. It comes with a minimal setup to help you get started quickly with Spark development.
+## Features
 
-🚀 What's Inside?
+- **12 interactive tools** - Sub-GHz scanner, RFID/NFC reader, Infrared remote, Bluetooth/WiFi/Zigbee scanners, GPIO toolkit, BadUSB creator, Spectrum Analyzer, and more
+- **Authentic device replica** - physical D-pad navigation, retro-tech aesthetic, monochrome screen that mimics the real Flipper Zero
+- **Data persistence** - saved signals, cards, and IR commands survive page reload via localStorage
+- **Security challenges** - 7 puzzles (1700+ points) testing protocol knowledge across multiple tools
+- **Education hub** - 12 topics covering RF fundamentals, RFID memory structures, Bluetooth protocols, and more
+- **Keyboard navigation** - arrow keys, Enter, Escape/Backspace for full keyboard-driven interaction
+- **Deep-link routing** - hash-based URLs for every screen (`#subghz`, `#rfid`, etc.)
+- **Code-split** - lazy-loaded screens for fast initial load
 
-- A clean, minimal Spark environment
-- Pre-configured for local development
-- Ready to scale with your ideas
+## Tech Stack
 
-🧠 What Can You Do?
+| Layer | Technology |
+|-------|-----------|
+| Framework | React 19 + TypeScript 5.7 |
+| Build | Vite 7 |
+| Styling | Tailwind CSS v4 (oklch color system) |
+| Animation | Framer Motion |
+| Icons | Phosphor Icons |
+| UI Kit | Radix UI / shadcn/ui |
+| Testing | Vitest + React Testing Library |
+| Deploy | Cloudflare Pages |
 
-Right now, this is just a starting point — the perfect place to begin building and testing your Spark applications.
+## Getting Started
 
-🧹 Just Exploring?
-No problem! If you were just checking things out and don’t need to keep this code:
+```bash
+npm install
+npm run dev        # http://localhost:5173
+```
 
-- Simply delete your Spark.
-- Everything will be cleaned up — no traces left behind.
+## Scripts
 
-📄 License For Spark Template Resources
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build (`tsc -b && vite build`) |
+| `npm run preview` | Preview production build |
+| `npm test` | Run tests with Vitest |
+| `npm run lint` | ESLint |
 
-The Spark Template files and resources from GitHub are licensed under the terms of the MIT license, Copyright GitHub, Inc.
+## Project Structure
 
-## AI Instructions
+```
+src/
+  App.tsx                    # Root shell, routing, keyboard nav
+  components/
+    FlipperDevice.tsx        # Physical device replica
+    screens/                 # 12 tool screens + 7 challenge screens
+    diagrams/                # Canvas & SVG visualizations
+    ui/                      # shadcn/ui components
+  hooks/
+    use-local-kv.ts          # localStorage persistence hook
+  test/                      # Vitest test suites
+```
 
-See AI usage guidance in [AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md).
+## License
+
+MIT

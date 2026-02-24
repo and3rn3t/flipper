@@ -6,6 +6,7 @@ import { FrequencySpectrum } from '@/components/diagrams/FrequencySpectrum'
 import { SignalWaveform } from '@/components/diagrams/SignalWaveform'
 import { ProtocolDiagram } from '@/components/diagrams/ProtocolDiagram'
 import { Broadcast, Play, FloppyDisk, ArrowsClockwise, Trash } from '@phosphor-icons/react'
+import { useLocalKV } from '@/hooks/use-local-kv'
 
 interface SubGHzScreenProps {
   onBack: () => void
@@ -65,7 +66,7 @@ export function SubGHzScreen({ onBack }: SubGHzScreenProps) {
   const [scanning, setScanning] = useState(false)
   const [progress, setProgress] = useState(0)
   const [detectedSignals, setDetectedSignals] = useState<Signal[]>([])
-  const [savedSignals, setSavedSignals] = useState<Signal[]>([])
+  const [savedSignals, setSavedSignals] = useLocalKV<Signal[]>('subghz-saved', [])
   const [transmitting, setTransmitting] = useState<number | null>(null)
   const [expandedSignal, setExpandedSignal] = useState<number | null>(null)
 

@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { CreditCard, FloppyDisk, Copy, ArrowsClockwise, Trash, CheckCircle } from '@phosphor-icons/react'
 import { RFIDStructure } from '@/components/diagrams/RFIDStructure'
 import { ProtocolDiagram } from '@/components/diagrams/ProtocolDiagram'
+import { useLocalKV } from '@/hooks/use-local-kv'
 
 interface RFIDScreenProps {
   onBack: () => void
@@ -77,7 +78,7 @@ export function RFIDScreen({ onBack }: RFIDScreenProps) {
   const [view, setView] = useState<View>('read')
   const [scanning, setScanning] = useState(false)
   const [cardData, setCardData] = useState<CardData | null>(null)
-  const [savedCards, setSavedCards] = useState<CardData[]>([])
+  const [savedCards, setSavedCards] = useLocalKV<CardData[]>('rfid-saved', [])
   const [writeTarget, setWriteTarget] = useState<CardData | null>(null)
   const [writing, setWriting] = useState(false)
   const [writeSuccess, setWriteSuccess] = useState(false)

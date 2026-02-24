@@ -1,24 +1,27 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FlipperDevice } from './components/FlipperDevice'
 import { MainMenuScreen, menuItems } from './components/screens/MainMenuScreen'
-import { SubGHzScreen } from './components/screens/SubGHzScreen'
-import { SpectrumAnalyzerScreen } from './components/screens/SpectrumAnalyzerScreen'
-import { RFIDScreen } from './components/screens/RFIDScreen'
-import { InfraredScreen } from './components/screens/InfraredScreen'
-import { BluetoothScreen } from './components/screens/BluetoothScreen'
-import { WiFiScreen } from './components/screens/WiFiScreen'
-import { ZigbeeScreen } from './components/screens/ZigbeeScreen'
-import { GPIOScreen } from './components/screens/GPIOScreen'
-import { BadUSBScreen } from './components/screens/BadUSBScreen'
-import { EducationScreen } from './components/screens/EducationScreen'
-import { ChallengeScreen } from './components/screens/ChallengeScreen'
 import { Card } from './components/ui/card'
 import { Toaster, toast } from 'sonner'
 
-type Screen = 'menu' | 'subghz' | 'spectrum' | 'rfid' | 'infrared' | 'bluetooth' | 'wifi' | 'zigbee' | 'gpio' | 'badusb' | 'education' | 'challenge'
+// Lazy-loaded screens for code splitting
+const SubGHzScreen = lazy(() => import('./components/screens/SubGHzScreen').then(m => ({ default: m.SubGHzScreen })))
+const SpectrumAnalyzerScreen = lazy(() => import('./components/screens/SpectrumAnalyzerScreen').then(m => ({ default: m.SpectrumAnalyzerScreen })))
+const RFIDScreen = lazy(() => import('./components/screens/RFIDScreen').then(m => ({ default: m.RFIDScreen })))
+const InfraredScreen = lazy(() => import('./components/screens/InfraredScreen').then(m => ({ default: m.InfraredScreen })))
+const BluetoothScreen = lazy(() => import('./components/screens/BluetoothScreen').then(m => ({ default: m.BluetoothScreen })))
+const WiFiScreen = lazy(() => import('./components/screens/WiFiScreen').then(m => ({ default: m.WiFiScreen })))
+const ZigbeeScreen = lazy(() => import('./components/screens/ZigbeeScreen').then(m => ({ default: m.ZigbeeScreen })))
+const GPIOScreen = lazy(() => import('./components/screens/GPIOScreen').then(m => ({ default: m.GPIOScreen })))
+const BadUSBScreen = lazy(() => import('./components/screens/BadUSBScreen').then(m => ({ default: m.BadUSBScreen })))
+const EducationScreen = lazy(() => import('./components/screens/EducationScreen').then(m => ({ default: m.EducationScreen })))
+const ChallengeScreen = lazy(() => import('./components/screens/ChallengeScreen').then(m => ({ default: m.ChallengeScreen })))
+const SettingsScreen = lazy(() => import('./components/screens/SettingsScreen').then(m => ({ default: m.SettingsScreen })))
 
-const validScreens: Screen[] = ['menu', 'subghz', 'spectrum', 'rfid', 'infrared', 'bluetooth', 'wifi', 'zigbee', 'gpio', 'badusb', 'education', 'challenge']
+type Screen = 'menu' | 'subghz' | 'spectrum' | 'rfid' | 'infrared' | 'bluetooth' | 'wifi' | 'zigbee' | 'gpio' | 'badusb' | 'education' | 'challenge' | 'settings'
+
+const validScreens: Screen[] = ['menu', 'subghz', 'spectrum', 'rfid', 'infrared', 'bluetooth', 'wifi', 'zigbee', 'gpio', 'badusb', 'education', 'challenge', 'settings']
 
 function getScreenFromHash(): Screen {
   const hash = window.location.hash.replace('#', '')
@@ -140,6 +143,8 @@ function App() {
         return <EducationScreen onBack={handleBackToMenu} />
       case 'challenge':
         return <ChallengeScreen onBack={handleBackToMenu} />
+      case 'settings':
+        return <SettingsScreen onBack={handleBackToMenu} />
       default:
         return <MainMenuScreen selectedIndex={selectedMenuIndex} />
     }
@@ -199,7 +204,13 @@ function App() {
                     transition={{ duration: 0.2, ease: 'easeInOut' }}
                     className="h-full"
                   >
-                    {renderScreen()}
+                    <Suspense fallback={
+                      <div className="h-full flex items-center justify-center font-mono text-xs text-primary/60">
+                        Loading...
+                      </div>
+                    }>
+                      {renderScreen()}
+                    </Suspense>
                   </motion.div>
                 </AnimatePresence>
               }
