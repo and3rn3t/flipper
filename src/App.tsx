@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { FlipperDevice } from './components/FlipperDevice'
 import { MainMenuScreen, menuItems } from './components/screens/MainMenuScreen'
 import { SubGHzScreen } from './components/screens/SubGHzScreen'
+import { SpectrumAnalyzerScreen } from './components/screens/SpectrumAnalyzerScreen'
 import { RFIDScreen } from './components/screens/RFIDScreen'
 import { InfraredScreen } from './components/screens/InfraredScreen'
 import { BluetoothScreen } from './components/screens/BluetoothScreen'
@@ -13,7 +14,7 @@ import { EducationScreen } from './components/screens/EducationScreen'
 import { ChallengeScreen } from './components/screens/ChallengeScreen'
 import { Card } from './components/ui/card'
 
-type Screen = 'menu' | 'subghz' | 'rfid' | 'infrared' | 'bluetooth' | 'wifi' | 'zigbee' | 'gpio' | 'badusb' | 'education' | 'challenge'
+type Screen = 'menu' | 'subghz' | 'spectrum' | 'rfid' | 'infrared' | 'bluetooth' | 'wifi' | 'zigbee' | 'gpio' | 'badusb' | 'education' | 'challenge'
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('menu')
@@ -44,6 +45,8 @@ function App() {
     switch (currentScreen) {
       case 'subghz':
         return <SubGHzScreen onBack={handleBackToMenu} />
+      case 'spectrum':
+        return <SpectrumAnalyzerScreen onBack={handleBackToMenu} />
       case 'rfid':
         return <RFIDScreen onBack={handleBackToMenu} />
       case 'infrared':

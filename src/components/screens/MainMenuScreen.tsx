@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Broadcast, CreditCard, LightbulbFilament, Cpu, Keyboard, Trophy, BookOpen, BluetoothConnected, WifiHigh, Graph } from '@phosphor-icons/react'
+import { Broadcast, CreditCard, LightbulbFilament, Cpu, Keyboard, Trophy, BookOpen, BluetoothConnected, WifiHigh, Graph, ChartLine } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 
 interface MainMenuScreenProps {
@@ -8,6 +8,7 @@ interface MainMenuScreenProps {
 
 const menuItems = [
   { id: 'subghz', label: 'Sub-GHz', icon: Broadcast, description: 'Radio Frequency Scanner' },
+  { id: 'spectrum', label: 'Spectrum', icon: ChartLine, description: 'Waterfall Analyzer' },
   { id: 'rfid', label: 'RFID/NFC', icon: CreditCard, description: 'Contactless Reader' },
   { id: 'infrared', label: 'Infrared', icon: LightbulbFilament, description: 'Universal Remote' },
   { id: 'bluetooth', label: 'Bluetooth', icon: BluetoothConnected, description: 'BT/BLE Scanner' },

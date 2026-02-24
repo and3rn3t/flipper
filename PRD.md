@@ -26,6 +26,13 @@ This is a showcase/educational tool with multiple interactive simulations repres
 - **Progression**: User starts scan → animated frequency spectrum appears → detects signals → shows signal details and waveforms
 - **Success criteria**: Visual feedback is clear, frequencies display realistically, users understand what's being captured
 
+### Spectrum Analyzer with Waterfall Display
+- **Functionality**: Real-time frequency spectrum analyzer with cascading waterfall visualization showing signal activity over time
+- **Purpose**: Provides advanced signal visualization capabilities for monitoring RF activity across different frequency bands
+- **Trigger**: Selected from main device menu
+- **Progression**: User selects frequency band → starts analyzer → waterfall display scrolls showing signal intensity → detected signals highlighted → signal details logged
+- **Success criteria**: Waterfall display updates smoothly, color gradient clearly shows signal strength, frequency bands are selectable, detected signals are logged with details
+
 ### RFID/NFC Reader
 - **Functionality**: Simulates reading contactless cards and tags
 - **Purpose**: Shows how Flipper reads access cards, keyfobs, and NFC tags
