@@ -4,10 +4,8 @@ import {
   CaretRight,
   CaretUp,
   CaretDown,
-  Circle,
   ArrowBendUpLeft,
 } from '@phosphor-icons/react';
-import { cn } from '@/lib/utils';
 
 interface FlipperDeviceProps {
   screenContent: React.ReactNode;
@@ -15,94 +13,243 @@ interface FlipperDeviceProps {
 }
 
 export function FlipperDevice({ screenContent, onNavigate }: FlipperDeviceProps) {
-  const handleButtonClick = (direction: 'up' | 'down' | 'left' | 'right' | 'ok' | 'back') => {
-    onNavigate(direction);
-  };
-
   return (
-    <div className="relative flex items-center justify-center p-4 sm:p-8">
+    <div className="relative flex items-center justify-center px-2 py-4 sm:p-8">
       <div className="relative w-full max-w-md">
-        <div className="relative bg-primary rounded-3xl p-4 sm:p-6 shadow-2xl">
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-1 bg-primary-foreground/20 rounded-full" />
+        {/* GPIO pins row along the top */}
+        <div className="flex justify-center gap-[3px] px-12">
+          {Array.from({ length: 26 }).map((_, i) => (
+            <div
+              key={i}
+              className="w-[3px] h-2.5 rounded-t-[1px]"
+              style={{ background: 'linear-gradient(to bottom, #c9a84c, #e8c858)' }}
+            />
+          ))}
+        </div>
 
-          <div className="bg-background rounded-2xl p-3 sm:p-4 mb-4 sm:mb-6 h-[280px] sm:h-[320px] border-4 border-primary-foreground/10 shadow-inner overflow-hidden">
-            <div className="h-full overflow-y-auto">{screenContent}</div>
+        {/* Device body */}
+        <div
+          className="relative overflow-hidden"
+          style={{
+            background: 'linear-gradient(180deg, #f0ece5 0%, #e8e4dc 40%, #dfdbd3 100%)',
+            borderRadius: '18px',
+            boxShadow: `
+              inset 0 1px 0 rgba(255,255,255,0.6),
+              0 2px 0 #ccc8be,
+              0 4px 0 #bfbab0,
+              0 6px 8px rgba(0,0,0,0.25),
+              0 16px 40px rgba(0,0,0,0.35)
+            `,
+          }}
+        >
+          {/* Top edge — IR window + status LEDs */}
+          <div className="flex items-center justify-between px-5 pt-3 pb-1">
+            <div
+              className="w-7 h-2.5 rounded-full"
+              style={{ background: 'linear-gradient(135deg, #1a0f2e, #2d1b4e)' }}
+              title="IR Blaster"
+            />
+            <div className="flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-400/50 shadow-[0_0_4px_rgba(74,222,128,0.4)]" />
+              <div className="w-1.5 h-1.5 rounded-full bg-blue-400/30" />
+            </div>
           </div>
 
-          <div className="flex items-center justify-between gap-4 sm:gap-6">
+          {/* Parting line */}
+          <div className="mx-4 h-[1px] bg-gradient-to-r from-transparent via-[#ccc7be] to-transparent" />
+
+          {/* Screen area */}
+          <div className="px-4 pt-3 pb-3">
+            <div
+              className="rounded-xl h-[260px] sm:h-[300px] overflow-hidden"
+              style={{
+                background: 'var(--background)',
+                border: '3px solid #2a2a3e',
+                boxShadow: `
+                  inset 0 2px 10px rgba(0,0,0,0.7),
+                  0 1px 0 rgba(255,255,255,0.15)
+                `,
+              }}
+            >
+              <div className="h-full overflow-y-auto p-3">{screenContent}</div>
+            </div>
+          </div>
+
+          {/* Controls section */}
+          <div className="flex items-center justify-between px-5 pb-4 pt-1 gap-3">
+            {/* Back button */}
             <motion.button
               whileTap={{ scale: 0.9 }}
-              onClick={() => handleButtonClick('back')}
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-background border-2 border-primary-foreground/20 flex items-center justify-center hover:border-primary transition-colors"
+              onClick={() => onNavigate('back')}
+              className="flex items-center justify-center transition-colors"
+              style={{
+                width: 44,
+                height: 44,
+                borderRadius: '50%',
+                background: 'linear-gradient(180deg, #e2ded5 0%, #d4cfC6 100%)',
+                boxShadow: `
+                  inset 0 1px 0 rgba(255,255,255,0.5),
+                  0 2px 4px rgba(0,0,0,0.2),
+                  0 1px 0 #c5c0b6
+                `,
+              }}
               aria-label="Back"
             >
-              <ArrowBendUpLeft weight="bold" className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
+              <ArrowBendUpLeft weight="bold" className="w-[18px] h-[18px] text-[#6b665d]" />
             </motion.button>
 
-            <div className="flex flex-col items-center gap-1.5 sm:gap-2">
-              <motion.button
-                whileTap={{ scale: 0.9 }}
-                onClick={() => handleButtonClick('up')}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-background border-2 border-primary-foreground/20 flex items-center justify-center hover:border-primary transition-colors"
-                aria-label="Up"
-              >
-                <CaretUp weight="bold" className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
-              </motion.button>
+            {/* D-pad */}
+            <div className="relative" style={{ width: 160, height: 160 }}>
+              {/* D-pad base ring */}
+              <div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: 'linear-gradient(180deg, #d8d3ca 0%, #c8c3b9 100%)',
+                  boxShadow: `
+                    inset 0 2px 6px rgba(0,0,0,0.12),
+                    0 1px 0 rgba(255,255,255,0.4)
+                  `,
+                }}
+              />
 
-              <div className="flex items-center gap-1.5 sm:gap-2">
+              {/* Up */}
+              <div className="absolute" style={{ top: 6, left: '50%', transform: 'translateX(-50%)' }}>
                 <motion.button
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => handleButtonClick('left')}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-background border-2 border-primary-foreground/20 flex items-center justify-center hover:border-primary transition-colors"
-                  aria-label="Left"
+                  whileTap={{ scale: 0.92 }}
+                  onClick={() => onNavigate('up')}
+                  className="flex items-center justify-center cursor-pointer"
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: '14px 14px 6px 6px',
+                    background: 'linear-gradient(180deg, #e6e2d9 0%, #d6d1c7 100%)',
+                    boxShadow: '0 2px 3px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.5)',
+                  }}
+                  aria-label="Up"
                 >
-                  <CaretLeft weight="bold" className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
-                </motion.button>
-
-                <motion.button
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => handleButtonClick('ok')}
-                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary border-2 border-primary flex items-center justify-center hover:bg-primary/80 transition-colors shadow-lg"
-                  aria-label="OK"
-                >
-                  <Circle weight="fill" className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
-                </motion.button>
-
-                <motion.button
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => handleButtonClick('right')}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-background border-2 border-primary-foreground/20 flex items-center justify-center hover:border-primary transition-colors"
-                  aria-label="Right"
-                >
-                  <CaretRight weight="bold" className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
+                  <CaretUp weight="bold" className="w-[18px] h-[18px] text-[#7a756b]" />
                 </motion.button>
               </div>
 
-              <motion.button
-                whileTap={{ scale: 0.9 }}
-                onClick={() => handleButtonClick('down')}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-background border-2 border-primary-foreground/20 flex items-center justify-center hover:border-primary transition-colors"
-                aria-label="Down"
-              >
-                <CaretDown weight="bold" className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
-              </motion.button>
+              {/* Down */}
+              <div className="absolute" style={{ bottom: 6, left: '50%', transform: 'translateX(-50%)' }}>
+                <motion.button
+                  whileTap={{ scale: 0.92 }}
+                  onClick={() => onNavigate('down')}
+                  className="flex items-center justify-center cursor-pointer"
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: '6px 6px 14px 14px',
+                    background: 'linear-gradient(180deg, #dedad0 0%, #cecac0 100%)',
+                    boxShadow: '0 2px 3px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.4)',
+                  }}
+                  aria-label="Down"
+                >
+                  <CaretDown weight="bold" className="w-[18px] h-[18px] text-[#7a756b]" />
+                </motion.button>
+              </div>
+
+              {/* Left */}
+              <div className="absolute" style={{ left: 6, top: '50%', transform: 'translateY(-50%)' }}>
+                <motion.button
+                  whileTap={{ scale: 0.92 }}
+                  onClick={() => onNavigate('left')}
+                  className="flex items-center justify-center cursor-pointer"
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: '14px 6px 6px 14px',
+                    background: 'linear-gradient(90deg, #e4e0d7 0%, #d6d1c7 100%)',
+                    boxShadow: '2px 0 3px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.5)',
+                  }}
+                  aria-label="Left"
+                >
+                  <CaretLeft weight="bold" className="w-[18px] h-[18px] text-[#7a756b]" />
+                </motion.button>
+              </div>
+
+              {/* Right */}
+              <div className="absolute" style={{ right: 6, top: '50%', transform: 'translateY(-50%)' }}>
+                <motion.button
+                  whileTap={{ scale: 0.92 }}
+                  onClick={() => onNavigate('right')}
+                  className="flex items-center justify-center cursor-pointer"
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: '6px 14px 14px 6px',
+                    background: 'linear-gradient(270deg, #e4e0d7 0%, #d6d1c7 100%)',
+                    boxShadow: '-2px 0 3px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.5)',
+                  }}
+                  aria-label="Right"
+                >
+                  <CaretRight weight="bold" className="w-[18px] h-[18px] text-[#7a756b]" />
+                </motion.button>
+              </div>
+
+              {/* Center OK button */}
+              <div className="absolute" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => onNavigate('ok')}
+                  className="flex items-center justify-center cursor-pointer"
+                  style={{
+                    width: 44,
+                    height: 44,
+                  borderRadius: '50%',
+                  background: 'linear-gradient(180deg, #e0dcd3 0%, #cdc8be 100%)',
+                  boxShadow: `
+                    inset 0 -2px 4px rgba(0,0,0,0.08),
+                    0 2px 6px rgba(0,0,0,0.15),
+                    inset 0 1px 0 rgba(255,255,255,0.5)
+                  `,
+                }}
+                  aria-label="OK"
+                >
+                  <span className="text-[10px] font-bold text-[#6b665d] tracking-wider select-none">
+                    OK
+                  </span>
+                </motion.button>
+              </div>
             </div>
 
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={() => handleButtonClick('back')}
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-background border-2 border-primary-foreground/20 flex items-center justify-center hover:border-primary transition-colors"
-              aria-label="Back"
+            {/* Spacer to balance the layout */}
+            <div className="w-[44px]" />
+          </div>
+
+          {/* Bottom branding */}
+          <div className="flex items-center justify-between px-5 pb-3">
+            <span
+              className="font-mono text-[10px] font-bold tracking-[0.2em] uppercase select-none"
+              style={{ color: '#9e998f' }}
             >
-              <ArrowBendUpLeft weight="bold" className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
-            </motion.button>
+              Flipper Zero
+            </span>
+            {/* Speaker grille */}
+            <div className="flex gap-[2px]">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="w-[3px] h-3 rounded-full bg-[#ccc7be]" />
+              ))}
+            </div>
           </div>
         </div>
 
+        {/* USB-C port on the bottom */}
+        <div className="flex justify-center">
+          <div
+            className="h-[5px] rounded-b-[3px]"
+            style={{
+              width: 32,
+              background: 'linear-gradient(180deg, #888, #666)',
+              boxShadow: '0 1px 2px rgba(0,0,0,0.3)',
+            }}
+            title="USB-C"
+          />
+        </div>
+
+        {/* Subtitle */}
         <div className="mt-4 text-center">
-          <div className="font-mono text-xl sm:text-2xl font-bold text-primary mb-1">
-            Flipper Zero
-          </div>
           <div className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider">
             Experimentation Lab
           </div>

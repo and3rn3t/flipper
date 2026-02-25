@@ -181,10 +181,10 @@ function App() {
       />
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6 md:mb-8">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-mono text-primary mb-1 md:mb-2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold font-mono text-primary mb-1 md:mb-2">
             Flipper Zero
           </h1>
-          <p className="text-foreground/60 text-xs sm:text-sm md:text-base">
+          <p className="text-foreground/60 text-[10px] sm:text-xs md:text-sm">
             Interactive Experimentation Lab
           </p>
         </div>

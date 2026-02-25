@@ -22,55 +22,48 @@ export function ProtocolDiagram({ title, fields, totalBits = 32 }: ProtocolDiagr
     'oklch(0.68 0.17 350)',
   ]
 
+  // Give each field a flex value based on bit count, but enforce a minimum so
+  // narrow fields stay readable. The minimum is expressed in the same "flex
+  // unit" space – fields whose natural proportion is below this threshold get
+  // bumped up, and the remaining space is distributed proportionally.
+  const MIN_FLEX = 3 // minimum flex units for any field
+  const flexValues = fields.map((f) => Math.max(f.bits / totalBits * 100, MIN_FLEX))
+
   return (
     <div className="space-y-2">
       <div className="text-xs text-foreground/60 font-mono">{title}</div>
-      
-      <div className="border border-border rounded overflow-hidden">
-        <div className="flex h-12">
+
+      <div className="border border-border rounded overflow-x-auto">
+        <div className="flex" style={{ minWidth: `${fields.length * 56}px` }}>
           {fields.map((field, index) => {
-            const widthPercent = (field.bits / totalBits) * 100
             const color = field.color || colors[index % colors.length]
-            
+
             return (
               <motion.div
                 key={index}
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ delay: index * 0.1, duration: 0.3 }}
-                className="relative border-r border-background last:border-r-0 flex items-center justify-center"
-                style={{ 
-                  width: `${widthPercent}%`,
+                className="relative border-r border-background last:border-r-0 flex flex-col items-center justify-center py-1.5"
+                style={{
+                  flex: flexValues[index],
+                  minWidth: 56,
                   backgroundColor: `${color}20`,
                   borderTop: `2px solid ${color}`,
                 }}
               >
-                <div className="text-center px-1">
-                  <div className="text-[0.65rem] font-semibold truncate" style={{ color }}>
-                    {field.label}
+                <div className="text-[0.65rem] font-semibold leading-tight text-center px-1" style={{ color }}>
+                  {field.label}
+                </div>
+                {field.value && (
+                  <div className="text-[0.55rem] text-foreground/50 font-mono leading-tight mt-0.5">
+                    {field.value}
                   </div>
-                  {field.value && (
-                    <div className="text-[0.6rem] text-foreground/50 font-mono">
-                      {field.value}
-                    </div>
-                  )}
+                )}
+                <div className="text-[0.5rem] text-foreground/35 mt-0.5">
+                  {field.bits}b
                 </div>
               </motion.div>
-            )
-          })}
-        </div>
-        
-        <div className="flex text-[0.6rem] text-foreground/40 border-t border-border">
-          {fields.map((field, index) => {
-            const widthPercent = (field.bits / totalBits) * 100
-            return (
-              <div
-                key={index}
-                className="border-r border-border last:border-r-0 py-1 text-center"
-                style={{ width: `${widthPercent}%` }}
-              >
-                {field.bits} bit{field.bits !== 1 ? 's' : ''}
-              </div>
             )
           })}
         </div>
