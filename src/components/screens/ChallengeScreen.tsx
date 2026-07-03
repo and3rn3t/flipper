@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Trophy, Lock, CheckCircle, XCircle, Star, ArrowClockwise } from '@phosphor-icons/react'
+import { motion } from 'framer-motion'
+import { Trophy, Lock, CheckCircle, Star, ArrowClockwise } from '@phosphor-icons/react'
 import { useLocalKV } from '@/hooks/use-local-kv'
 import { cn } from '@/lib/utils'
 import { RFIDChallengeScreen } from './challenges/RFIDChallengeScreen'

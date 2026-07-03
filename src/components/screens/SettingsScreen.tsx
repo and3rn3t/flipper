@@ -85,7 +85,7 @@ export function SettingsScreen({ onBack }: SettingsScreenProps) {
               <Badge variant="outline" className="text-[10px] border-primary/50 text-primary">v1.0.0</Badge>
             </div>
             <p className="text-[11px] text-foreground/50 leading-relaxed">
-              An interactive experimentation dashboard showcasing the Flipper Zero's capabilities through simulations and educational content. Built as a portfolio project.
+              An interactive experimentation dashboard showcasing the Flipper Zero&apos;s capabilities through simulations and educational content. Built as a portfolio project.
             </p>
             <a
               href="https://github.com/and3rn3t/flipper"

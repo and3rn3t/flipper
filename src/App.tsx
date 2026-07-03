@@ -225,7 +225,7 @@ function App() {
               </h2>
               <p className="text-xs md:text-sm text-foreground/80 mb-4">
                 Flipper Zero is a portable multi-tool for pentesters and hardware hackers. 
-                It's designed for interaction with access control systems, radio protocols, 
+                It&apos;s designed for interaction with access control systems, radio protocols,
                 RFID, NFC, and more.
               </p>
               <div className="space-y-2">

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 
 interface SignalWaveformProps {
@@ -55,7 +54,6 @@ export function SignalWaveform({ type, animated = true, color = 'oklch(0.68 0.18
             break
           
           case 'digital': {
-            const segmentWidth = width / 16
             const segment = Math.floor(i / (points / 16))
             const pattern = [1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1]
             const offset = Math.floor(phaseRef.current / 0.5) % pattern.length

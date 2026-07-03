@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { CheckCircle, Keyboard, Play } from '@phosphor-icons/react'
-import { cn } from '@/lib/utils'
 
 interface BadUSBChallengeScreenProps {
   onComplete: () => void

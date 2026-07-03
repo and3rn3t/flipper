@@ -92,7 +92,6 @@ export function KeystrokeFlow({ steps = [], currentStep = -1, className = '' }: 
         const x = startX + i * (nodeW + 4)
         const isDone = i < currentStep
         const isActive = i === currentStep
-        const isPending = i > currentStep
 
         // Connection line to next
         if (i < nodeCount - 1) {

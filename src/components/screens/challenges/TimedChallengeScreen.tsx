@@ -226,7 +226,7 @@ export function TimedChallengeScreen({ onComplete, onBack }: TimedChallengeScree
           >
             <div className="p-4 rounded border-2 border-red-400 bg-red-400/20 text-center">
               <XCircle weight="fill" className="w-12 h-12 text-red-400 mx-auto mb-2" />
-              <div className="text-lg font-bold text-red-400 mb-1">TIME'S UP!</div>
+              <div className="text-lg font-bold text-red-400 mb-1">TIME&apos;S UP!</div>
               <div className="text-sm text-foreground/80 mb-2">
                 Only scanned {cardsScanned}/{requiredCards} badges
               </div>

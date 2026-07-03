@@ -169,7 +169,7 @@ export function SpectrumAnalyzerScreen({ onBack }: SpectrumAnalyzerScreenProps) 
           <div className="space-y-2">
             <div className="text-xs text-foreground/60">RECENT DETECTIONS:</div>
             <div className="space-y-2 max-h-48 overflow-y-auto">
-              {detectedSignals.slice().reverse().map((signal, idx) => (
+              {detectedSignals.slice().reverse().map((signal) => (
                 <motion.div
                   key={signal.timestamp}
                   initial={{ opacity: 0, x: -10 }}
