@@ -1,5 +1,6 @@
 {
     "name": "flipper-zero-lab",
+    "description": "Flipper Zero Lab — interactive experimentation dashboard, no hardware required.",
     "private": true,
     "version": "0.0.0",
     "type": "module",
