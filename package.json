@@ -1,7 +1,12 @@
 {
     "name": "flipper-zero-lab",
-    "engines": { "node": ">=24.13.0" },
-    "repository": { "type": "git", "url": "https://github.com/and3rn3t/flipper.git" },
+    "engines": {
+        "node": ">=24.13.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/and3rn3t/flipper.git"
+    },
     "license": "MIT",
     "description": "Flipper Zero Lab — interactive experimentation dashboard, no hardware required.",
     "private": true,
@@ -42,7 +47,7 @@
         "tw-animate-css": "^1.2.4"
     },
     "devDependencies": {
-        "@and3rn3t/eslint-config": "^0.2.0",
+        "@and3rn3t/eslint-config": "^0.3.0",
         "@tailwindcss/postcss": "^4.1.8",
         "@testing-library/jest-dom": "^6.9.1",
         "@testing-library/react": "^16.3.2",
@@ -50,7 +55,7 @@
         "@types/react": "^19.0.10",
         "@types/react-dom": "^19.0.4",
         "@vitejs/plugin-react-swc": "^4.2.2",
-        "eslint": "^9.28.0",
+        "eslint": "^10.13.0",
         "jsdom": "^28.1.0",
         "prettier": "^3.8.1",
         "tailwindcss": "^4.1.11",
